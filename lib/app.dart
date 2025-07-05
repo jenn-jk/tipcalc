@@ -8,6 +8,24 @@ class TipCalc extends StatefulWidget {
 }
 
 class _TipCalcState extends State<TipCalc> {
+  // properties
+  int _personCount = 1;
+
+  // methods
+  void increment() {
+    setState(() {
+      _personCount++;
+    });
+  }
+
+  void decrement() {
+    setState(() {
+      if (_personCount > 1) {
+        _personCount--;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -32,11 +50,61 @@ class _TipCalcState extends State<TipCalc> {
             child: Column(
               children: [
                 Text("Total per Person", style: style),
-                Text('\$20.0', style: style.copyWith(
-                  color: theme.colorScheme.onPrimary,
-                  fontSize: theme.textTheme.displaySmall!.fontSize
-                )),
+                Text(
+                  '\$20.0',
+                  style: style.copyWith(
+                    color: theme.colorScheme.onPrimary,
+                    fontSize: theme.textTheme.displaySmall!.fontSize,
+                  ),
+                ),
               ],
+            ),
+          ),
+
+          // main container
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: theme.colorScheme.primary, width: 2),
+              ),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      prefix: Icon(Icons.attach_money),
+                      labelText: "Enter Amount",
+                    ),
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      print(value);
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("split", style: theme.textTheme.titleMedium),
+                      Row(
+                        children: [
+                          IconButton(
+                            color: theme.colorScheme.primary,
+                            onPressed: decrement,
+                            icon: Icon(Icons.remove),
+                          ),
+                          Text("$_personCount"),
+                          IconButton(
+                            color: theme.colorScheme.primary,
+                            onPressed: increment,
+                            icon: Icon(Icons.add),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
