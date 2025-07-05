@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tipcalc/person_counter.dart';
 
 class TipCalc extends StatefulWidget {
   @override
@@ -82,27 +83,7 @@ class _TipCalcState extends State<TipCalc> {
                       print(value);
                     },
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("split", style: theme.textTheme.titleMedium),
-                      Row(
-                        children: [
-                          IconButton(
-                            color: theme.colorScheme.primary,
-                            onPressed: decrement,
-                            icon: Icon(Icons.remove),
-                          ),
-                          Text("$_personCount"),
-                          IconButton(
-                            color: theme.colorScheme.primary,
-                            onPressed: increment,
-                            icon: Icon(Icons.add),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  PersonCounter(theme: theme, personCount: _personCount, onIncrement: increment, onDecrement: decrement),
                 ],
               ),
             ),
