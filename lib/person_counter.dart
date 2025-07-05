@@ -19,7 +19,7 @@ class PersonCounter extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("split", style: theme.textTheme.titleMedium),
+        Text("Split", style: theme.textTheme.titleMedium),
         Row(
           children: [
             IconButton(
