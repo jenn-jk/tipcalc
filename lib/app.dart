@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tipcalc/bill_amount_field.dart';
 import 'package:tipcalc/person_counter.dart';
 import 'package:tipcalc/tip_slider.dart';
 
@@ -70,6 +71,7 @@ class _TipCalcState extends State<TipCalc> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
+                  padding: EdgeInsets.all(20.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                     border: Border.all(
@@ -79,15 +81,9 @@ class _TipCalcState extends State<TipCalc> {
                   ),
                   child: Column(
                     children: [
-                      TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          prefix: Icon(Icons.attach_money),
-                          labelText: "Enter Amount",
-                        ),
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          print(value);
+                      BillAmountField(
+                        onChanged: (String value) {
+                          print("Bill Amount Entered: $value");
                         },
                       ),
                       PersonCounter(
