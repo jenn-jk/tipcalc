@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tipcalc/person_counter.dart';
+import 'package:tipcalc/tip_slider.dart';
 
 class TipCalc extends StatefulWidget {
   @override
@@ -117,13 +118,9 @@ class _TipCalcState extends State<TipCalc> {
                       ),
 
                       // sliding tip element
-                      Slider(
-                        value: _tipPercentage,
-                        min: 0,
-                        max: 0.5,
-                        divisions: 10,
-                        label: "${(_tipPercentage * 100).round()}%",
-                        onChanged: (value) {
+                      TipSlider(
+                        tipPercentage: _tipPercentage,
+                        onChanged: (double value) {
                           setState(() {
                             _tipPercentage = value;
                           });
