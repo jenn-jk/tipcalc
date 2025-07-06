@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tipcalc/bill_amount_field.dart';
 import 'package:tipcalc/person_counter.dart';
 import 'package:tipcalc/tip_slider.dart';
+import 'package:tipcalc/total_per_person.dart';
 
 class TipCalc extends StatefulWidget {
   @override
@@ -14,6 +15,8 @@ class _TipCalcState extends State<TipCalc> {
   // properties
   int _personCount = 1;
   double _tipPercentage = 0;
+  double _billTotal = 0;
+  double _tipTotal = 0;
 
   // methods
   void increment() {
@@ -30,9 +33,19 @@ class _TipCalcState extends State<TipCalc> {
     });
   }
 
+  double calcBillTotal() {
+    return ((_billTotal + _billTotal * _tipPercentage) / _personCount);
+  }
+
+  double calcTipTotal() {
+    return (_billTotal * _tipPercentage);
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    double billAmount = calcBillTotal();
+    double tipAmount = calcTipTotal();
 
     // add style
     final style = theme.textTheme.titleMedium!.copyWith(
@@ -47,25 +60,7 @@ class _TipCalcState extends State<TipCalc> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
-                padding: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Column(
-                  children: [
-                    Text("Total Per Person", style: style),
-                    Text(
-                      '\$20.0',
-                      style: style.copyWith(
-                        color: theme.colorScheme.onPrimary,
-                        fontSize: theme.textTheme.displaySmall!.fontSize,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              TotalPerPerson(style: style, billAmount: billAmount, theme: theme),
 
               // main container
               Padding(
@@ -83,7 +78,9 @@ class _TipCalcState extends State<TipCalc> {
                     children: [
                       BillAmountField(
                         onChanged: (String value) {
-                          print("Bill Amount Entered: $value");
+                          setState(() {
+                            _billTotal = double.parse(value);
+                          });
                         },
                       ),
                       PersonCounter(
@@ -98,7 +95,10 @@ class _TipCalcState extends State<TipCalc> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Tip", style: theme.textTheme.bodyMedium),
-                          Text("\$20", style: theme.textTheme.bodyMedium),
+                          Text(
+                            "${tipAmount.round()}",
+                            style: theme.textTheme.bodyMedium,
+                          ),
                         ],
                       ),
 

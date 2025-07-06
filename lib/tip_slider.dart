@@ -18,12 +18,7 @@ class TipSlider extends StatelessWidget {
       max: 0.5,
       divisions: 10,
       label: "${(_tipPercentage * 100).round()}%",
-      onChanged: onChanged,
-      // onChanged: (value) {
-      //   setState(() {
-      //     _tipPercentage = value;
-      //   });
-      // },
+      onChanged: onChanged
     );
   }
 }
