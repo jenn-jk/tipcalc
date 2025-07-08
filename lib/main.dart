@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tipcalc/TipCalcModel.dart';
 import 'package:tipcalc/app.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (context) => TipCalcModel(),
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
