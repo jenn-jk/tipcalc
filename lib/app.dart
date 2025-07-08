@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tipcalc/TipCalcModel.dart';
+import 'package:tipcalc/tip_calc_model.dart';
 import 'package:tipcalc/bill_amount_field.dart';
 import 'package:tipcalc/person_counter.dart';
 import 'package:tipcalc/tip_slider.dart';
+import 'package:tipcalc/toggle_theme_button.dart';
 import 'package:tipcalc/total_per_person.dart';
 
 class TipCalc extends StatefulWidget {
@@ -31,7 +32,10 @@ class _TipCalcState extends State<TipCalc> {
     );
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Tip Calculator"),
+        actions: [ToggleThemeButton()],
+      ),
       body:
           // top area
           Column(
